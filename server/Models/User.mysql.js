@@ -31,17 +31,17 @@ User.getOne  = (id, result) => {
             result(err,null);
             return;
         }
-        result(null, {data:res})
+        result(null, {res})
     })
 }
 
 User.getOneByUsername  = (username, result) => {
-    sql.query(`SELECT * FROM user WHERE username=${username}`, (err,res) => {
+    sql.query(`SELECT * FROM user WHERE username='${username}'`, (err,res) => {
         if(err){
             result(err,null);
             return;
         }
-        result(null, {data:res})
+        result(null, res[0])
     })
 }
 

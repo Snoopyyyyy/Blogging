@@ -40,13 +40,13 @@ exports.getOne = async function(req,res){
     })
 }
 exports.login = async function(req,res){
-    await User.getOneByUsername(req.params.username, (err , user ) => {
+    await User.getOneByUsername(req.body.username, (err , user ) => {
         if(err){
             res.status(500).send({
                 message: err.message || 'Une erreur est arrive'
             })
         }else{
-            res.json({logged:  data.password === req.body.password});
+            res.json({logged:  user.password === req.body.password});
         }
     })
 }
