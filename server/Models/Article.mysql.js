@@ -23,37 +23,37 @@ Article.getAll = (result) => {
             result(err,null);
             return;
         }
-        result(null, {data:res})
+        result(null, res)
     })
 }
 
 Article.getOne  = (id, result) => {
     sql.query(`SELECT * FROM article WHERE id=${id}`, (err,res) => {
-        if(err){
+        if(err || !res || !res[0]){
             result(err,null);
             return;
         }
-        result(null, {data:res})
+        result(null, res[0])
     })
 }
 
 Article.updateById = (id,article, result ) => {
     sql.query(`UPDATE article SET title = ? ,  author = ? ,  content = ? ,  date = ?  WHERE id = ${id} `,
         [article.title,article.author,article.content,article.date], (err,res) => {
-            if(err){
+            if(err || !res || !res[0] ){
                 result(err,null);
                 return;
             }
-            result(null,{data:res})
+            result(null, res[0])
         })
 }
 Article.deleteById = (id, result ) => {
     sql.query(`DELETE FROM article WHERE id = ${id}`, (err,res) => {
-        if(err){
+        if(err || !res || !res[0] ){
             result(err,null);
             return;
         }
-        result(null,{data:res})
+        result(null, res[0])
     })
 }
 

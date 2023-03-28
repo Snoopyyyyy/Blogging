@@ -2,6 +2,7 @@ const sql = require('../config/mysql');
 
 const User = function(User) {
     this.username = User.username;
+    this.role = User.role;
     this.password = User.password;
 }
 
@@ -21,23 +22,23 @@ User.getAll = (result) => {
             result(err,null);
             return;
         }
-        result(null, {data:res})
+        result(null, res)
     })
 }
 
 User.getOne  = (id, result) => {
     sql.query(`SELECT * FROM user WHERE id=${id}`, (err,res) => {
-        if(err){
+        if(err || !res || !res[0] ){
             result(err,null);
             return;
         }
-        result(null, {res})
+        result(null, res[0])
     })
 }
 
 User.getOneByUsername  = (username, result) => {
     sql.query(`SELECT * FROM user WHERE username='${username}'`, (err,res) => {
-        if(err){
+        if(err || !res || !res[0] ){
             result(err,null);
             return;
         }

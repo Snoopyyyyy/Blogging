@@ -14,7 +14,7 @@ exports.create = async function(req,res) {
                 message: err.message || 'Une erreur est arrive'
             })
         }else{
-            res.json({data:data});
+            res.jsonp(data);
         }
 
     })
@@ -27,19 +27,19 @@ exports.getAll = async function(req,res){
                 message: err.message || 'Une erreur est arrive'
             })
         }else{
-            res.json({data:data});
+            res.json(data);
         }
 
     })
 }
 exports.getOne = async function(req,res){
     await Article.getOne(req.params.id, (err , data ) => {
-        if(err){
+        if(err || !data || !data[0]){
             res.status(500).send({
                 message: err.message || 'Une erreur est arrive'
             })
         }else{
-            res.json({data:data});
+            res.json(data);
         }
 
     })
@@ -59,7 +59,7 @@ exports.updateById = async function(req,res) {
                 message: err.message || 'Une erreur est arrive'
             })
         }else{
-            res.json({data:data});
+            res.json(data);
         }
 
     })
@@ -73,7 +73,7 @@ exports.deleteById = async function(req,res) {
                 message: err.message || 'Une erreur est arrive'
             })
         }else{
-            res.json({data:data});
+            res.json(data);
         }
 
     })
