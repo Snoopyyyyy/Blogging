@@ -18,11 +18,11 @@ export default class ArticleService {
     }
 
     create(article: Article): Promise<Article> {
-        return this.axios.$post<Article>(`/articles/createArticle`, JSON.stringify(article))
+        return this.axios.$post<Article>(`/articles/createArticle`, article)
     }
 
     update(id: string, article: Article): Promise<Article> {
-        return this.axios.$put<Article>(`/update/single/article/${id}`, JSON.stringify(article))
+        return this.axios.$put<Article>(`/update/single/article/${id}`, article)
     }
 
     delete(id: string): Promise<Article> {

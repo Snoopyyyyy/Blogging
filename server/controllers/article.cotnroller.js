@@ -35,8 +35,8 @@ exports.getAll = async function(req,res){
 exports.getOne = async function(req,res){
     await Article.getOne(req.params.id, (err , data ) => {
         if(err || !data || !data[0]){
-            res.status(500).send({
-                message: err.message || 'Une erreur est arrive'
+            res.status(err ? 500 : 404).send({
+                message: err?.message || 'Une erreur est arrive'
             })
         }else{
             res.json(data);

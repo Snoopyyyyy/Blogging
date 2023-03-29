@@ -42,11 +42,17 @@ exports.getOne = async function(req,res){
 exports.login = async function(req,res){
     await User.getOneByUsername(req.body.username, (err , user ) => {
         if(err || !user){
-            res.status(500).send({
-                message: err.message || 'Une erreur est arrive'
+            res.status(err ? 500 : 401).send({
+                message: err?.message || 'Invalid Credentials'
             })
         }else{
-            res.json({logged:  user.password === req.body.password});
+            if(user.password === req.body.password) {
+                res.json({logged: true });
+            }else{
+                res.status(401).send({
+                    message: 'Invalid Credentials'
+                })
+            }
         }
     })
 }

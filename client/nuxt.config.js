@@ -15,10 +15,13 @@ export default {
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
-  css: [],
+  css: [ '~/assets/css/index.css' ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [ '~/plugins/service.plugin.ts' ],
+  plugins: [ 
+    '~/plugins/service.plugin.ts',
+    '~/plugins/interceptors.plugin.ts'
+   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -43,4 +46,12 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
+
+  watchers: {
+    webpack: {
+      aggregateTimeout: 300,
+      poll: 1000
+    }
+  }
 }
+

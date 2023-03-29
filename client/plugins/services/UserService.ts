@@ -10,10 +10,10 @@ export default class UserService {
     }
 
     login(username: string, password: string): Promise<boolean> {
-        return this.axios.$put<boolean>('/auth/login', JSON.stringify({ username, password }));
+        return this.axios.$put<boolean>('/auth/login', { username, password });
     }
 
     register(user: User): Promise<User> {
-        return this.axios.$post<User>('/auth/register', JSON.stringify(user));
+        return this.axios.$post<User>('/auth/register', user);
     }
 }
